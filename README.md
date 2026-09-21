@@ -93,3 +93,19 @@ during Task 5.
 The detector output includes the timestamp, service, anomaly type, detection
 reasons, and original source record, making it possible to understand why a
 record was flagged.
+
+## Task 4: AIOps Event Flow
+
+The event flow uses the provided architecture:
+
+- `Event`: the anomaly message created by `AnomalyDetector`.
+- `EventProducer`: publishes the generated anomaly event.
+- `EventTopic`: stores events in the in-memory topic.
+- `EventConsumer`: receives events from the topic.
+- Downstream AIOps output: displays the consumed anomaly event.
+
+The detector generated anomaly events and passed them to the producer. The
+producer published the events, but the consumer received zero events because the
+producer uses `service-events` while the consumer uses a separate
+`anomaly-events` topic. Therefore, the events did not reach downstream AIOps
+processing. This topic mismatch will be corrected in Task 5.
