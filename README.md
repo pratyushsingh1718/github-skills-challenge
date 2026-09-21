@@ -181,3 +181,18 @@ Records processed: 10
 Anomalies detected: 2
 Events consumed: 2
 ```
+
+## Task 8: Validation Record
+
+The provided validation suite was run with:
+
+```bash
+PYTHONPATH=.:src python3 -m pytest -q
+```
+
+Result: `8 passed`.
+
+The validation and final pipeline execution confirmed that operational data can
+be loaded, anomalies can be detected, anomaly events can be generated and
+published, the shared topic can deliver events to the consumer, and the final
+AIOps output completes successfully.
