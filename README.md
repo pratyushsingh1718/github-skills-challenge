@@ -71,3 +71,25 @@ The observations at `10:05` and `10:06` represent unusual behaviour. Both have
 CPU utilisation at 94% and high memory utilisation at 91%. The messages describe
 a payment service timeout and a database connection timeout.
 
+
+## Task 3: Anomaly Detection Findings
+
+The provided `AnomalyDetector` processed all 10 operational records.
+
+It detected anomalies at:
+
+- `2026-09-20T10:05:00`: response time was 610 ms, above the 500 ms threshold.
+- `2026-09-20T10:06:00`: response time was 640 ms, CPU was 94%, and memory was
+  91%, exceeding the configured thresholds.
+
+The normal observations were not flagged because their metrics remained below the
+configured thresholds.
+
+The supplied records contain `ERROR` log events at `10:05` and `10:06`.
+However, the current detector checks for `WARNING`, so it does not add an
+`Error log detected` reason. This is a detection limitation and will be corrected
+during Task 5.
+
+The detector output includes the timestamp, service, anomaly type, detection
+reasons, and original source record, making it possible to understand why a
+record was flagged.
