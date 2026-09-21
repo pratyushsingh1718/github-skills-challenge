@@ -40,3 +40,34 @@ Good luck!
 
 &copy; 2025 GitHub &bull; [Code of Conduct](https://www.contributor-covenant.org/version/2/1/code_of_conduct/code_of_conduct.md) &bull; [MIT License](https://gh.io/mit)
 
+## Task 2: Operational Data Analysis
+
+The operational data is stored in `data/service_data.json` and contains 10
+timestamped observations for the `payment-service`.
+
+Metric fields:
+
+- `response_time_ms`: payment request response time.
+- `cpu_percent`: CPU utilisation.
+- `memory_percent`: memory utilisation.
+
+
+Log fields:
+
+- `log_level`: log severity, such as `INFO` or `ERROR`.
+- `message`: description of the service event.
+
+
+The `timestamp` field records when each observation occurred. The timestamps are
+in ISO format and occur at one-minute intervals from
+`2026-09-20T10:00:00` through `2026-09-20T10:09:00`.
+The observations from `10:00` through `10:04` and `10:07` through `10:09`
+represent normal behaviour. They have `INFO` logs, response times from 120 ms
+to 150 ms, CPU utilisation from 42% to 50%, and memory utilisation from 51% to
+57%.
+
+The observations at `10:05` and `10:06` represent unusual behaviour. Both have
+`ERROR` logs and response times above 500 ms. The `10:06` record also has high
+CPU utilisation at 94% and high memory utilisation at 91%. The messages describe
+a payment service timeout and a database connection timeout.
+
