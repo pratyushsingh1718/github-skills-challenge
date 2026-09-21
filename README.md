@@ -145,3 +145,39 @@ The final AIOps output represented these operational issues:
   ERROR log.
 - `2026-09-20T10:06:00`: Database connection timeout, with high response time,
   high CPU, high memory, and an ERROR log.
+
+## Task 7: README Documentation and Reproduction
+
+This README documents the complete assessment scenario and reproduction evidence:
+
+1. The AIOps scenario monitors a synthetic `payment-service` for slow requests,
+  resource saturation, and timeout errors.
+2. The operational data contains timestamped response-time, CPU, memory, log
+  level, and log message fields.
+3. Normal and unusual metric and log observations are described in Task 2.
+4. Anomaly detection results and detection reasons are recorded in Task 3.
+5. The producer, topic, consumer, event, and downstream flow are described in
+  Task 4.
+6. The final workflow result is recorded in Task 6.
+7. The detector and topic-wiring issues and their corrections are recorded in
+  Task 5.
+8. A limitation is the use of fixed thresholds; adaptive or rolling-window
+  baselines could improve detection for changing workloads.
+9. The commands below reproduce the demonstration without external
+  infrastructure.
+
+Reproduction commands:
+
+```bash
+python3 -m pip install -r requirements.txt
+PYTHONPATH=.:src python3 -m pytest -q
+python3 src/aiops_pipeline.py
+```
+
+Expected final pipeline result:
+
+```text
+Records processed: 10
+Anomalies detected: 2
+Events consumed: 2
+```
