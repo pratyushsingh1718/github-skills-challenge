@@ -127,3 +127,21 @@ Two workflow issues were identified.
 After the corrections, the pipeline processed 10 records, detected 2 anomalies,
 and the consumer received 2 events. The anomaly reasons now include the relevant
 ERROR log information.
+
+## Task 6: End-to-End Pipeline Execution
+
+The corrected pipeline completed the full workflow:
+
+`Operational Data -> Anomaly Detection -> Event -> Producer -> Topic -> Consumer -> AIOps Output`
+
+The pipeline processed 10 operational records and detected 2 anomalous
+observations. Two anomaly events were generated and published to the shared
+`anomaly-events` topic. The consumer received and processed both events
+successfully.
+
+The final AIOps output represented these operational issues:
+
+- `2026-09-20T10:05:00`: Payment service timeout, with high response time and an
+  ERROR log.
+- `2026-09-20T10:06:00`: Database connection timeout, with high response time,
+  high CPU, high memory, and an ERROR log.
