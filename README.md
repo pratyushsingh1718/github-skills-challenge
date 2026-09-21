@@ -109,3 +109,21 @@ producer published the events, but the consumer received zero events because the
 producer uses `service-events` while the consumer uses a separate
 `anomaly-events` topic. Therefore, the events did not reach downstream AIOps
 processing. This topic mismatch will be corrected in Task 5.
+
+## Task 5: Workflow Troubleshooting and Corrections
+
+Two workflow issues were identified.
+
+1. **Anomaly detector:** `src/anomaly_detector.py` checked for the log level
+   `WARNING`, but the supplied data uses `ERROR`. As a result, the concerning
+   error logs were not included in the anomaly reasons. The condition was changed
+   to detect `ERROR`.
+
+2. **Event topic wiring:** `src/aiops_pipeline.py` created separate topics for
+   the producer and consumer. The producer published to `service-events`, while
+   the consumer read from `anomaly-events`. The pipeline was corrected so both
+   components use the same `anomaly-events` topic.
+
+After the corrections, the pipeline processed 10 records, detected 2 anomalies,
+and the consumer received 2 events. The anomaly reasons now include the relevant
+ERROR log information.
